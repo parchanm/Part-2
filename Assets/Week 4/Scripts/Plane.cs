@@ -10,9 +10,12 @@ public class Plane : MonoBehaviour
     LineRenderer lineRenderer;
     Vector2 currentPosition;
     Rigidbody2D rigidbody;
-    public float speed = 1;
+    public float speed;
     public AnimationCurve landing;
     float landingTimer;
+
+    //public GameObject[] planeSprite;
+    public float planeRotation;
 
     private void OnMouseDown()
     {
@@ -43,6 +46,20 @@ public class Plane : MonoBehaviour
         lineRenderer.SetPosition(0, transform.position);
 
         rigidbody = GetComponent<Rigidbody2D>();
+
+        //set position quaternoion.identity for position here and speed 
+        // quaternion euler
+        //int speedRand = Random.Range(1, 6);
+        //int rand = Random.Range(0, planeSprite.Length);
+        //GameObject instance = (GameObject)Instantiate(planeSprite[rand], transform);
+
+        speed = Random.Range(1, 3);
+
+        Vector3 spawnPosition = new Vector3(Random.Range(-5, 5), Random.Range(-5, 5), 0);
+        transform.position = spawnPosition;
+
+        float spawnRotation = Random.Range(0, 360);
+        transform.rotation = Quaternion.Euler(0, 0, spawnRotation);
     }
 
     private void FixedUpdate()
