@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class Plane : MonoBehaviour
@@ -13,6 +14,10 @@ public class Plane : MonoBehaviour
     public float speed;
     public AnimationCurve landing;
     float landingTimer;
+    SpriteRenderer spriteRenderer;
+
+    //float planeDistance;
+    //ublic float destroyDistance;
 
     //public GameObject[] planeSprite;
     public float planeRotation;
@@ -47,6 +52,9 @@ public class Plane : MonoBehaviour
 
         rigidbody = GetComponent<Rigidbody2D>();
 
+        spriteRenderer = GetComponent<SpriteRenderer>();
+        spriteRenderer.color = Color.white;
+
         //set position quaternoion.identity for position here and speed 
         // quaternion euler
         //int speedRand = Random.Range(1, 6);
@@ -70,8 +78,19 @@ public class Plane : MonoBehaviour
             Vector2 direction = points[0] - currentPosition;
             float angle = Mathf.Atan2(direction.x, direction.y) * Mathf.Rad2Deg;
             rigidbody.rotation = -angle;
+            //
+
+            //float planeDistance = Vector3.Distance(currentPosition
+            //float destroyDistance = 1;
+
+            //if (planeDistance < destroyDistance)
+            //{
+            //    Destroy(gameObject);
+            //}
+            //
         }
         rigidbody.MovePosition(rigidbody.position + (Vector2)transform.up * speed * Time.deltaTime);
+
     }
     private void Update()
     {
@@ -99,5 +118,35 @@ public class Plane : MonoBehaviour
                 lineRenderer.positionCount--;
             }
         }
+        //canavs size calculated
+        if (transform.position.x < -10 || transform.position.x > 10 || transform.position.y < -5 || transform.position.y > 5)
+        {
+            Destroy(gameObject);
+        }
+    }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        spriteRenderer.color = Color.red;
+
+        if (collision.CompareTag("Plane"))
+        {
+            float destroyRange = 1.46f;
+            float distance = Vector3.Distance(transform.position, collision.transform.position);
+
+            Debug.Log("Distance check:" + distance); //this debug.log was a savior
+
+            if (distance < destroyRange)
+            {
+                Destroy(gameObject);
+                Destroy(collision.gameObject);
+                Debug.Log("Boom");
+            }
+        }
+    }
+
+    private void OnTriggerExit2D(Collider2D collision)
+    {
+        spriteRenderer.color = Color.white;
     }
 }
