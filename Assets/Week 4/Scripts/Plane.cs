@@ -16,6 +16,11 @@ public class Plane : MonoBehaviour
     float landingTimer;
     SpriteRenderer spriteRenderer;
 
+    public Collider2D runwayCollider;
+
+    public bool planeLanded = false;
+    public int currentScore;
+
     //float planeDistance;
     //ublic float destroyDistance;
 
@@ -94,7 +99,8 @@ public class Plane : MonoBehaviour
     }
     private void Update()
     {
-        if(Input.GetKey(KeyCode.Space))
+        //if(Input.GetKey(KeyCode.Space))
+        if (planeLanded ==true)
         {
             landingTimer += 0.1f * Time.deltaTime;
             float interpolation = landing.Evaluate(landingTimer);
@@ -127,10 +133,11 @@ public class Plane : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        spriteRenderer.color = Color.red;
 
         if (collision.CompareTag("Plane"))
         {
+            spriteRenderer.color = Color.red;
+
             float destroyRange = 1.46f;
             float distance = Vector3.Distance(transform.position, collision.transform.position);
 
@@ -142,6 +149,12 @@ public class Plane : MonoBehaviour
                 Destroy(collision.gameObject);
                 Debug.Log("Boom");
             }
+        }
+
+        if (collision.CompareTag("Runway"))
+        {
+            planeLanded = true;
+            Debug.Log("plane landed?:" + planeLanded);
         }
     }
 
