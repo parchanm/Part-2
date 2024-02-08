@@ -20,6 +20,7 @@ public class Knight : MonoBehaviour
         animator = GetComponent<Animator>();
         health = maxHealth;
         isDead = false;
+        //push not working test 1
     }
 
     private void FixedUpdate()
