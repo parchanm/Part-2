@@ -146,6 +146,26 @@ PrefabInstance:
       propertyPath: m_Interactable
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 290929453891239783, guid: a09b754b28b25d9419b81345dde6a194, type: 3}
+      propertyPath: m_OnValueChanged.m_PersistentCalls.m_Calls.Array.size
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 290929453891239783, guid: a09b754b28b25d9419b81345dde6a194, type: 3}
+      propertyPath: m_OnValueChanged.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 290929453891239783, guid: a09b754b28b25d9419b81345dde6a194, type: 3}
+      propertyPath: m_OnValueChanged.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 11500000, guid: bd11b0c9ee6d977468a08639def0885a, type: 3}
+    - target: {fileID: 290929453891239783, guid: a09b754b28b25d9419b81345dde6a194, type: 3}
+      propertyPath: m_OnValueChanged.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 290929453891239783, guid: a09b754b28b25d9419b81345dde6a194, type: 3}
+      propertyPath: m_OnValueChanged.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: UnityEditor.MonoScript, UnityEditor.CoreModule
+      objectReference: {fileID: 0}
     - target: {fileID: 1614611992690412832, guid: a09b754b28b25d9419b81345dde6a194, type: 3}
       propertyPath: m_AnchorMax.x
       value: 0
