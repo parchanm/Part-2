@@ -16,15 +16,17 @@ public class Samurai : MonoBehaviour
     Rigidbody2D rigidbody;
     public float speed = 20;
     public float attackTimer = 1;
+    public int score = 0;
 
     bool moveSwitch = false;
     bool isDead;
+    bool attacking = false;
 
     private void OnMouseDown()
     {
         if (isDead) return;
         points = new List<Vector2>();
-        Vector2 currentPosition = (Vector2)Camera.main.ScreenToWorldPoint(Input.mousePosition);
+        //Vector2 currentPosition = (Vector2)Camera.main.ScreenToWorldPoint(Input.mousePosition);
         points.Add(currentPosition);
         lineRenderer.positionCount = 1;
         lineRenderer.SetPosition(0, transform.position);
@@ -61,6 +63,8 @@ public class Samurai : MonoBehaviour
         {
             destination = Camera.main.ScreenToWorldPoint(Input.mousePosition);
         }
+
+        attacking = (points.Count > 0 && moveSwitch);
         //animator.SetFloat("Movement", movement.magnitude);
     }
 
@@ -79,7 +83,7 @@ public class Samurai : MonoBehaviour
 
         currentPosition = new Vector2(transform.position.x, transform.position.y);
 
-        if (attackTimer > 0)
+        if (!attacking && attackTimer > 0)
         {
             attackTimer -= Time.deltaTime;
             return;
@@ -105,5 +109,17 @@ public class Samurai : MonoBehaviour
     {
         attackTimer = 1;
         moveSwitch = true;
+    }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.CompareTag("Enemy") && attacking == true)
+        {
+            Destroy(collision.gameObject);
+            score ++;
+        } else
+        {
+            Destroy(gameObject);
+        }
     }
 }

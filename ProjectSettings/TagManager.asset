@@ -6,6 +6,7 @@ TagManager:
   tags:
   - Plane
   - Runway
+  - Enemy
   layers:
   - Default
   - TransparentFX
