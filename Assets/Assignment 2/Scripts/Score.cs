@@ -8,15 +8,8 @@ public class Score : MonoBehaviour
 {
     public Slider score;
 
-    public void TakeDamage(float scoreAdd)
+    public void SetScore(float addScore)
     {
-        //PlayerPrefs.SetFloat("Health", health);
-        score.value += scoreAdd;
-
-    }
-
-    public void SetScore()
-    {
-        score.value = PlayerPrefs.GetFloat("Score");
+        score.value += addScore;
     }
 }

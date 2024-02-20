@@ -3,6 +3,7 @@ using UnityEngine.EventSystems;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
 
 public class Samurai : MonoBehaviour
 {
@@ -21,6 +22,9 @@ public class Samurai : MonoBehaviour
     bool moveSwitch = false;
     bool isDead;
     bool attacking = false;
+
+    public TextMeshProUGUI youWin;
+    public TextMeshProUGUI youLose;
 
     private void OnMouseDown()
     {
@@ -53,8 +57,11 @@ public class Samurai : MonoBehaviour
         lineRenderer.SetPosition(0, transform.position);
 
         rigidbody = GetComponent<Rigidbody2D>();
-        
 
+        gameObject.SendMessage("SetScore");
+
+        youWin.gameObject.SetActive(false);
+        youLose.gameObject.SetActive(false);
     }
 
     private void Update()
@@ -74,6 +81,7 @@ public class Samurai : MonoBehaviour
         if (!moveSwitch) return;
 
         movement = destination - (Vector2)transform.position;
+
         if (movement.magnitude < 0.1)
         {
             movement = Vector2.zero;
@@ -103,6 +111,11 @@ public class Samurai : MonoBehaviour
                 lineRenderer.positionCount--;
             }
         }
+
+        if (score >= 12 && !isDead)
+        {
+            youWin.gameObject.SetActive(true);
+        }
     }
 
     private void OnMouseUp()
@@ -117,9 +130,12 @@ public class Samurai : MonoBehaviour
         {
             Destroy(collision.gameObject);
             score ++;
+            gameObject.SendMessage("SetScore", 1, SendMessageOptions.DontRequireReceiver);
         } else
         {
-            Destroy(gameObject);
+            Destroy(gameObject); //for test, add death anim
+            youLose.gameObject.SetActive(true);
+            isDead = true;
         }
     }
 }
