@@ -9,6 +9,7 @@ public class SpawnEnemy : MonoBehaviour
     public GameObject enemy;
     public void activateSpawner()
     {
+        //instantiate(spawn) enemy three times when the button is pressed
         Instantiate(enemy, transform.position, transform.rotation);
         Instantiate(enemy, transform.position, transform.rotation);
         Instantiate(enemy, transform.position, transform.rotation);

@@ -35,7 +35,8 @@ public class Samurai : MonoBehaviour
 
     private void OnMouseDown()
     {
-        if (isDead) return;
+        //draw path, reset points
+        if (isDead) return; //disregard the code below if the samurai's dead
         points = new List<Vector2>();
         points.Add(currentPosition);
         lineRenderer.positionCount = 1;
@@ -45,7 +46,7 @@ public class Samurai : MonoBehaviour
 
     private void OnMouseDrag()
     {
-        if (isDead) return;
+        if (isDead) return; //disregard the code below if the samurai's dead
         Vector2 currentPosition = (Vector2)Camera.main.ScreenToWorldPoint(Input.mousePosition);
         if (Vector2.Distance(currentPosition, lastPosition) > newPointThreshold)
         {
@@ -74,6 +75,7 @@ public class Samurai : MonoBehaviour
 
     private void Update()
     {
+        //input to set the destination
         if (Input.GetMouseButtonDown(1))
         {
             destination = Camera.main.ScreenToWorldPoint(Input.mousePosition);
@@ -87,9 +89,10 @@ public class Samurai : MonoBehaviour
 
     private void FixedUpdate()
     {
-        if (isDead) return;
-        if (!moveSwitch) return;
+        if (isDead) return; //disregard the code below if the samurai's dead
+        if (!moveSwitch) return; //disregard the code below if the switch is not on
 
+        //move to destination
         movement = destination - (Vector2)transform.position;
 
         if (movement.magnitude < 0.1)
@@ -107,6 +110,7 @@ public class Samurai : MonoBehaviour
             return;
         }
 
+        //move to next point
         if (points.Count > 0)
         {
             rigidbody.MovePosition(rigidbody.position + (points[0] - currentPosition).normalized * speed * Time.deltaTime);
@@ -119,22 +123,22 @@ public class Samurai : MonoBehaviour
                     lineRenderer.SetPosition(i, lineRenderer.GetPosition(i + 1));
                 }
                 lineRenderer.positionCount--;
-                //
+                
+                //spawn afterimages
                 if (spawnTimer <= 0)
                 {
                     int rand = Random.Range(0, afterArray.Length);
                     GameObject instance = (GameObject)Instantiate(afterArray[rand], transform.position, Quaternion.identity);
-                    //startTimer += 0.1f * Time.deltaTime;
                     spawnTimer = startTimer;
                 }
                 else
                 {
                     spawnTimer -= Time.deltaTime;
                 }
-                //
+                
             }
         }
-
+        //wincon and display win message
         if (score >= 12 && !isDead)
         {
             youWin.gameObject.SetActive(true);
@@ -143,6 +147,7 @@ public class Samurai : MonoBehaviour
 
     private void OnMouseUp()
     {
+        //start moving, reset timer, move switch on, trigger animation (mistyped attack)
         attackTimer = 1;
         moveSwitch = true;
         animator.SetTrigger("Adttack");
@@ -150,6 +155,7 @@ public class Samurai : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
+        //while attacking, destroy enemy and add score, sendmessage
         if (collision.CompareTag("Enemy") && attacking == true)
         {
             Destroy(collision.gameObject);
@@ -157,7 +163,8 @@ public class Samurai : MonoBehaviour
             gameObject.SendMessage("SetScore", 1, SendMessageOptions.DontRequireReceiver);
         } else
         {
-            //Destroy(gameObject); //for test, add death anim
+            //otherwise, die and game over
+            //Destroy(gameObject); //for test, add death anim later
             animator.SetTrigger("Death");
             youLose.gameObject.SetActive(true);
             isDead = true;
