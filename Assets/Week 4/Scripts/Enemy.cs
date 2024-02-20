@@ -8,6 +8,7 @@ public class Enemy : MonoBehaviour
 {
     public float speed;
     Rigidbody2D rb;
+    Animator animator;
     // Start is called before the first frame update
     void Start()
     {
@@ -18,6 +19,7 @@ public class Enemy : MonoBehaviour
         speed = Random.Range(1, 3);
         float startRotation = Random.Range(0, 360);
         transform.rotation = Quaternion.Euler(0, 0, startRotation);
+        animator = GetComponent<Animator>();
     }
 
     void Update()

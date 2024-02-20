@@ -26,11 +26,12 @@ public class Samurai : MonoBehaviour
     public TextMeshProUGUI youWin;
     public TextMeshProUGUI youLose;
 
+    Animator animator;
+
     private void OnMouseDown()
     {
         if (isDead) return;
         points = new List<Vector2>();
-        //Vector2 currentPosition = (Vector2)Camera.main.ScreenToWorldPoint(Input.mousePosition);
         points.Add(currentPosition);
         lineRenderer.positionCount = 1;
         lineRenderer.SetPosition(0, transform.position);
@@ -62,6 +63,8 @@ public class Samurai : MonoBehaviour
 
         youWin.gameObject.SetActive(false);
         youLose.gameObject.SetActive(false);
+
+        animator = GetComponent<Animator>();
     }
 
     private void Update()
@@ -69,10 +72,12 @@ public class Samurai : MonoBehaviour
         if (Input.GetMouseButtonDown(1))
         {
             destination = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+            //animator.SetTrigger("Walk");
         }
 
         attacking = (points.Count > 0 && moveSwitch);
-        //animator.SetFloat("Movement", movement.magnitude);
+
+        animator.SetFloat("Movement", movement.magnitude);
     }
 
     private void FixedUpdate()
@@ -122,6 +127,7 @@ public class Samurai : MonoBehaviour
     {
         attackTimer = 1;
         moveSwitch = true;
+        animator.SetTrigger("Adttack");
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
@@ -133,7 +139,8 @@ public class Samurai : MonoBehaviour
             gameObject.SendMessage("SetScore", 1, SendMessageOptions.DontRequireReceiver);
         } else
         {
-            Destroy(gameObject); //for test, add death anim
+            //Destroy(gameObject); //for test, add death anim
+            animator.SetTrigger("Death");
             youLose.gameObject.SetActive(true);
             isDead = true;
         }
