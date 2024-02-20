@@ -1487,9 +1487,41 @@ PrefabInstance:
       propertyPath: youLose
       value: 
       objectReference: {fileID: 1118230381}
+    - target: {fileID: 7899597309882643, guid: c8d55a8d5c221804291167c6c0e55aa2, type: 3}
+      propertyPath: startTimer
+      value: 0.03
+      objectReference: {fileID: 0}
+    - target: {fileID: 7899597309882643, guid: c8d55a8d5c221804291167c6c0e55aa2, type: 3}
+      propertyPath: afterArray.Array.size
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 7899597309882643, guid: c8d55a8d5c221804291167c6c0e55aa2, type: 3}
+      propertyPath: afterArray.Array.data[0]
+      value: 
+      objectReference: {fileID: 5409613276026306725, guid: d8167ef4a121ff1418960167f9e1e525, type: 3}
+    - target: {fileID: 7899597309882643, guid: c8d55a8d5c221804291167c6c0e55aa2, type: 3}
+      propertyPath: afterArray.Array.data[1]
+      value: 
+      objectReference: {fileID: 642717156602483417, guid: 0bb114b8894eccf4c9a5d2e7aec37005, type: 3}
+    - target: {fileID: 7899597309882643, guid: c8d55a8d5c221804291167c6c0e55aa2, type: 3}
+      propertyPath: afterArray.Array.data[2]
+      value: 
+      objectReference: {fileID: 3427156665035432947, guid: 2171f3a117afe9044b250561bd2849a8, type: 3}
     - target: {fileID: 1757789535598243913, guid: c8d55a8d5c221804291167c6c0e55aa2, type: 3}
       propertyPath: m_Name
       value: Samurai
+      objectReference: {fileID: 0}
+    - target: {fileID: 4488643406531428706, guid: c8d55a8d5c221804291167c6c0e55aa2, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 10306, guid: 0000000000000000f000000000000000, type: 0}
+    - target: {fileID: 4488643406531428706, guid: c8d55a8d5c221804291167c6c0e55aa2, type: 3}
+      propertyPath: m_Parameters.widthCurve.m_Curve.Array.data[0].time
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4488643406531428706, guid: c8d55a8d5c221804291167c6c0e55aa2, type: 3}
+      propertyPath: m_Parameters.widthCurve.m_Curve.Array.data[0].value
+      value: 0.19117668
       objectReference: {fileID: 0}
     - target: {fileID: 7170624306063037522, guid: c8d55a8d5c221804291167c6c0e55aa2, type: 3}
       propertyPath: m_LocalPosition.x

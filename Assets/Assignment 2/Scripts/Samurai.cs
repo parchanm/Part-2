@@ -28,6 +28,11 @@ public class Samurai : MonoBehaviour
 
     Animator animator;
 
+
+    float spawnTimer;
+    public float startTimer;
+    public GameObject[] afterArray;
+
     private void OnMouseDown()
     {
         if (isDead) return;
@@ -114,6 +119,19 @@ public class Samurai : MonoBehaviour
                     lineRenderer.SetPosition(i, lineRenderer.GetPosition(i + 1));
                 }
                 lineRenderer.positionCount--;
+                //
+                if (spawnTimer <= 0)
+                {
+                    int rand = Random.Range(0, afterArray.Length);
+                    GameObject instance = (GameObject)Instantiate(afterArray[rand], transform.position, Quaternion.identity);
+                    //startTimer += 0.1f * Time.deltaTime;
+                    spawnTimer = startTimer;
+                }
+                else
+                {
+                    spawnTimer -= Time.deltaTime;
+                }
+                //
             }
         }
 

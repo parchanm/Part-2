@@ -9,8 +9,10 @@ public class ControlTheScene : MonoBehaviour
 {
     public void LoadNextScene()
     {
+        //get the index of the current scene, and move on to next scene (goes around)
         int currentSceneIndex = SceneManager.GetActiveScene().buildIndex;
         int nextSceneIndex = (currentSceneIndex + 1) % SceneManager.sceneCountInBuildSettings;
+        //load the next scene
         SceneManager.LoadScene(nextSceneIndex);
     }
 }
