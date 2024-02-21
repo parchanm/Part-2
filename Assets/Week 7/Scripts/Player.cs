@@ -16,8 +16,8 @@ public class Player : MonoBehaviour
 
     void Start()
     {
-        SpriteRenderer sr = GetComponent<SpriteRenderer>();
-        Rigidbody2D rb = GetComponent<Rigidbody2D>();
+        sr = GetComponent<SpriteRenderer>();
+        rb = GetComponent<Rigidbody2D>();
         Selected(false);
     }
 
