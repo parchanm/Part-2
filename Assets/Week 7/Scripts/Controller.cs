@@ -6,15 +6,15 @@ using UnityEngine;
 
 public class Controller : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+    public static Player SelectedPlayer { get; private set; }
 
-    // Update is called once per frame
-    void Update()
+    public static void SetSelectedPlayer(Player player)
     {
-        
+        if(SelectedPlayer != null)
+        {
+            SelectedPlayer.Selected(false);
+        }
+        player.Selected(true);
+        SelectedPlayer = player;
     }
 }
