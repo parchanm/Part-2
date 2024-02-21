@@ -7,20 +7,23 @@ using UnityEngine;
 public class Player : MonoBehaviour
 {
     SpriteRenderer sr;
+    Rigidbody2D rb;
     public Color selectedColor;
     public Color unselectedColor;
+    public float speed = 10;
 
     //bool selected = false;
 
     void Start()
     {
         SpriteRenderer sr = GetComponent<SpriteRenderer>();
+        Rigidbody2D rb = GetComponent<Rigidbody2D>();
         Selected(false);
     }
 
     private void OnMouseDown()
     {
-        Selected(true);
+        Controller.SetSelectedPlayer(this);
     }
     // Update is called once per frame
     void Update()
@@ -37,5 +40,9 @@ public class Player : MonoBehaviour
         {
             sr.color = unselectedColor;
         }
+    }
+    public void Move(Vector2 direction)
+    {
+        rb.AddForce(direction * speed, ForceMode2D.Impulse);
     }
 }
