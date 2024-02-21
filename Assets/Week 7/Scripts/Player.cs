@@ -10,7 +10,7 @@ public class Player : MonoBehaviour
     Rigidbody2D rb;
     public Color selectedColor;
     public Color unselectedColor;
-    public float speed = 10;
+    public float speed = 100;
 
     //bool selected = false;
 
@@ -45,4 +45,6 @@ public class Player : MonoBehaviour
     {
         rb.AddForce(direction * speed, ForceMode2D.Impulse);
     }
+
+
 }

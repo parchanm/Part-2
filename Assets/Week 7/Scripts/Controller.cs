@@ -3,6 +3,7 @@ using UnityEngine.EventSystems;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
 
 public class Controller : MonoBehaviour
 {
@@ -10,7 +11,10 @@ public class Controller : MonoBehaviour
     float charge;
     public float maxCharge = 1;
     Vector2 direction;
+    public TextMeshProUGUI showScore;
+
     public static Player SelectedPlayer { get; private set; }
+    public static float score = 0;
 
     public static void SetSelectedPlayer(Player player)
     {
@@ -50,5 +54,12 @@ public class Controller : MonoBehaviour
             //see where the normalize is! just get the directions
             direction = (Camera.main.ScreenToWorldPoint(Input.mousePosition) - SelectedPlayer.transform.position).normalized * charge;
         }
+        UpdateScore();
+    }
+
+    public void UpdateScore()
+    {
+        showScore.text = "Score: " + score.ToString();
+        //Debug.Log(showScore.text);
     }
 }
